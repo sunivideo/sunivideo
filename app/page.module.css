@@ -84,10 +84,13 @@
 .langBtn {
   background: transparent;
   color: var(--text-dim);
-  padding: 6px 12px;
+  padding: 6px 10px;
   border-radius: 999px;
   font-size: 13px;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .langBtnActive {
@@ -153,6 +156,23 @@
   font-size: 14px;
 }
 
+.socialRow {
+  display: flex;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.socialRow svg {
+  width: 26px;
+  height: 26px;
+  color: var(--text-dim);
+  transition: color 0.15s;
+}
+
+.socialRow svg:hover {
+  color: var(--lime);
+}
+
 /* Demo card */
 .demoCard {
   background: var(--surface);
@@ -162,17 +182,15 @@
   position: relative;
 }
 
-.demoCard::before {
-  content: "canlı önizleme";
-  position: absolute;
-  top: -12px;
-  left: 20px;
+.demoBadge {
+  display: inline-block;
   background: var(--pink);
   color: var(--ink);
   font-size: 12px;
   font-weight: 600;
   padding: 4px 12px;
   border-radius: 999px;
+  margin-bottom: 14px;
 }
 
 .demoTextarea {

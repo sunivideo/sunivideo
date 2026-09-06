@@ -55,7 +55,7 @@ export default function Home() {
                 className={`${styles.langBtn} ${lang === l.code ? styles.langBtnActive : ''}`}
                 onClick={() => setLang(l.code)}
               >
-                {l.label}
+                {l.flag} {l.label}
               </button>
             ))}
           </div>
@@ -79,9 +79,15 @@ export default function Home() {
             </button>
             <span className={styles.ghostNote}>{t.ghostNote}</span>
           </div>
+          <div className={styles.socialRow}>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.5V8.5L15.8 12l-6.2 3.5z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c2.7 0 3.1 0 4.1.06 1.1.05 1.8.21 2.5.46a5 5 0 0 1 1.8 1.17 5 5 0 0 1 1.17 1.8c.25.7.41 1.4.46 2.5.05 1 .06 1.4.06 4.1s0 3.1-.06 4.1c-.05 1.1-.21 1.8-.46 2.5a5 5 0 0 1-1.17 1.8 5 5 0 0 1-1.8 1.17c-.7.25-1.4.41-2.5.46-1 .05-1.4.06-4.1.06s-3.1 0-4.1-.06c-1.1-.05-1.8-.21-2.5-.46a5 5 0 0 1-1.8-1.17 5 5 0 0 1-1.17-1.8c-.25-.7-.41-1.4-.46-2.5C2 15.1 2 14.7 2 12s0-3.1.06-4.1c.05-1.1.21-1.8.46-2.5a5 5 0 0 1 1.17-1.8A5 5 0 0 1 5.5 2.5c.7-.25 1.4-.41 2.5-.46C8.9 2 9.3 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.3a3.3 3.3 0 1 1 0-6.6 3.3 3.3 0 0 1 0 6.6zm5.2-8.5a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.8a4.6 4.6 0 0 1-2.9-3.4h-3.1v13.4a2.6 2.6 0 1 1-1.9-2.5V9.9a5.9 5.9 0 1 0 5 5.8V9.4a7.7 7.7 0 0 0 4.5 1.4V7.6a4.6 4.6 0 0 1-1.6-1.8z"/></svg>
+          </div>
         </div>
 
         <div className={styles.demoCard} id="demo">
+          <span className={styles.demoBadge}>{t.demoBadge}</span>
           <div style={{ fontWeight: 600 }}>{t.demoLabel}</div>
           <textarea
             className={styles.demoTextarea}
