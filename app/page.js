@@ -149,6 +149,42 @@ export default function Home() {
         </div>
       </section>
 
+      <section className={styles.section}>
+        <h2 className={styles.sectionTitle}>Sıkça sorulan sorular</h2>
+        <div className={styles.faqList}>
+          <details className={styles.faqItem}>
+            <summary>Üretilen videoları ticari olarak kullanabilir miyim?</summary>
+            <p>Evet — kendi YouTube, Instagram veya TikTok hesabında paylaşmak, hatta bir markanın içeriği olarak kullanmak serbest.</p>
+          </details>
+          <details className={styles.faqItem}>
+            <summary>Videoda filigran (logo) oluyor mu?</summary>
+            <p>Hayır, ürettiğin videolar filigransız, direkt paylaşıma hazır şekilde iniyor.</p>
+          </details>
+          <details className={styles.faqItem}>
+            <summary>Hangi platformlar için uygun?</summary>
+            <p>Videolar dikey (9:16) formatta üretiliyor — Instagram Reels, YouTube Shorts ve TikTok'a birebir uyumlu.</p>
+          </details>
+          <details className={styles.faqItem}>
+            <summary>Bir video ne kadar sürede hazır olur?</summary>
+            <p>Genellikle 1-2 dakika içinde — metnini yazıp süreyi seçtikten sonra beklersin, video hazır olunca ekranda belirir.</p>
+          </details>
+          <details className={styles.faqItem}>
+            <summary>Kaç saniyelik video üretebilirim?</summary>
+            <p>Şu an 5 ve 10 saniyelik videolar tam destekleniyor. Daha uzun süreler (15-60 saniye) yakında ekleniyor.</p>
+          </details>
+        </div>
+      </section>
+
+      <section className={styles.finalCta}>
+        <h2 className={styles.sectionTitle}>Hazırsan, ilk videon bir cümle uzağında.</h2>
+        <button
+          className={styles.primaryBtn}
+          onClick={() => document.getElementById('demo').scrollIntoView({ behavior: 'smooth' })}
+        >
+          Hemen Dene
+        </button>
+      </section>
+
       <footer className={styles.footer}>
         <div>suni<span style={{ color: 'var(--lime)' }}>video</span> — Bakü</div>
         <div>© 2026 sunivideo.az</div>
