@@ -46,6 +46,47 @@ export default function Home() {
     </div>
   );
 
+  const FLAG_PATHS = {
+    az: (
+      <g>
+        <rect width="20" height="14" fill="#00b5e2" />
+        <rect y="4.67" width="20" height="4.67" fill="#ef3340" />
+        <rect y="9.33" width="20" height="4.67" fill="#509e2f" />
+        <circle cx="10.5" cy="7" r="2.1" fill="#fff" />
+        <circle cx="11.3" cy="7" r="1.7" fill="#ef3340" />
+        <polygon points="13.3,7 14.4,7.35 13.7,6.45 13.7,7.55 14.4,6.65" fill="#fff" />
+      </g>
+    ),
+    tr: (
+      <g>
+        <rect width="20" height="14" fill="#e30a17" />
+        <circle cx="8.2" cy="7" r="3" fill="#fff" />
+        <circle cx="9.2" cy="7" r="2.4" fill="#e30a17" />
+        <polygon points="12,7 13.3,7.4 12.4,6.4 12.4,7.6 13.3,6.6" fill="#fff" />
+      </g>
+    ),
+    en: (
+      <g>
+        <rect width="20" height="14" fill="#012169" />
+        <path d="M0,0 L20,14 M20,0 L0,14" stroke="#fff" strokeWidth="2.4" />
+        <path d="M0,0 L20,14 M20,0 L0,14" stroke="#c8102e" strokeWidth="1" />
+        <path d="M10,0 V14 M0,7 H20" stroke="#fff" strokeWidth="4" />
+        <path d="M10,0 V14 M0,7 H20" stroke="#c8102e" strokeWidth="2" />
+      </g>
+    ),
+    ru: (
+      <g>
+        <rect width="20" height="14" fill="#fff" />
+        <rect y="4.67" width="20" height="4.67" fill="#0039a6" />
+        <rect y="9.33" width="20" height="4.67" fill="#d52b1e" />
+      </g>
+    ),
+  };
+
+  const Flag = ({ code }) => (
+    <svg className={styles.flagIcon} viewBox="0 0 20 14">{FLAG_PATHS[code]}</svg>
+  );
+
   return (
     <div className={styles.page}>
       <nav className={styles.nav}>
@@ -58,7 +99,7 @@ export default function Home() {
                 className={`${styles.langBtn} ${lang === l.code ? styles.langBtnActive : ''}`}
                 onClick={() => setLang(l.code)}
               >
-                {l.flag} {l.label}
+                <Flag code={l.code} /> {l.label}
               </button>
             ))}
           </div>
