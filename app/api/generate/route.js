@@ -5,35 +5,26 @@ fal.config({ credentials: process.env.FAL_KEY });
 
 export async function POST(request) {
   try {
-    const { script } = await request.json();
+    const { script, duration } = await request.json();
     if (!script || script.trim().length === 0) {
       return Response.json({ error: 'Metin boş olamaz' }, { status: 400 });
     }
 
-    // 1) ElevenLabs ile seslendirme üret (test amaçlı, videoya henüz bağlanmıyor)
-    const voiceRes = await fetch(
-      'https://api.elevenlabs.io/v1/text-to-speech/21m00Tcm4TlvDq8ikWAM',
-      {
-        method: 'POST',
-        headers: {
-          'xi-api-key': process.env.ELEVENLABS_API_KEY,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          text: script,
-          model_id: 'eleven_multilingual_v2',
-        }),
-      }
-    );
-    if (!voiceRes.ok) {
-      const errText = await voiceRes.text();
-      throw new Error('ElevenLabs hatası: ' + errText);
+    const dur = Number(duration) || 5;
+    if (dur !== 5 && dur !== 10) {
+      return Response.json(
+        { error: 'Şu an sadece 5 veya 10 saniyelik videolar üretilebiliyor.' },
+        { status: 400 }
+      );
     }
-    // Ses üretildi (şu an sadece doğrulama amaçlı; ileride videoya senkronize edeceğiz)
 
-    // 2) fal.ai ile metinden video üret (basit test modeli)
+    // NOT: ElevenLabs (seslendirme) şimdilik devre dışı — sadece fal.ai video
+    // üretimini test ediyoruz. ElevenLabs'e geri dönmek için bu yorumu kaldırıp
+    // üstteki kodu geri getirin.
+
+    // fal.ai ile metinden video üret (basit test modeli, sessiz)
     const result = await fal.subscribe('fal-ai/kling-video/v1/standard/text-to-video', {
-      input: { prompt: script },
+      input: { prompt: script, duration: String(dur) },
       logs: false,
     });
 
