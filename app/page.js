@@ -40,13 +40,16 @@ export default function Home() {
     document.getElementById('demo').scrollIntoView({ behavior: 'smooth' });
   }
 
+  const Logo = ({ small }) => (
+    <div className={`${styles.logo} ${small ? styles.logoSmall : ''}`}>
+      Sun<span className={styles.logoSun}>🌞</span>İVideo
+    </div>
+  );
+
   return (
     <div className={styles.page}>
       <nav className={styles.nav}>
-        <div className={styles.logo}>
-          <svg className={styles.logoMark} viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.8L21 11l-6.8 2.2L12 20l-2.2-6.8L3 11l6.8-2.2L12 2z"/></svg>
-          suni<span>video</span>
-        </div>
+        <Logo />
         <div className={styles.navRight}>
           <div className={styles.langSwitch}>
             {LANGS.map((l) => (
@@ -87,8 +90,8 @@ export default function Home() {
         </div>
 
         <div className={styles.demoCard} id="demo">
-          <span className={styles.demoBadge}>{t.demoBadge}</span>
-          <div style={{ fontWeight: 600 }}>{t.demoLabel}</div>
+          <Logo small />
+          <div style={{ fontWeight: 600, marginTop: 12 }}>{t.demoLabel}</div>
           <textarea
             className={styles.demoTextarea}
             value={script}
@@ -189,7 +192,7 @@ export default function Home() {
       </section>
 
       <footer className={styles.footer}>
-        <div>suni<span style={{ color: 'var(--lime)' }}>video</span> — Bakı</div>
+        <Logo />
         <div>© 2026 sunivideo.az</div>
       </footer>
     </div>
