@@ -198,18 +198,12 @@ export default function Home() {
       <section className={styles.section}>
         <h2 className={styles.sectionTitle}>{t.showcaseTitle}</h2>
         <div className={styles.showcase}>
-          <div className={styles.reelCard}>
-            <video className={styles.reelVideo} src="/showcase/reel-1.mp4" autoPlay loop muted playsInline />
-            <span className={styles.reelLabel}>Reels</span>
-          </div>
-          <div className={styles.reelCard}>
-            <video className={styles.reelVideo} src="/showcase/reel-2.mp4" autoPlay loop muted playsInline />
-            <span className={styles.reelLabel}>Shorts</span>
-          </div>
-          <div className={styles.reelCard}>
-            <video className={styles.reelVideo} src="/showcase/reel-3.mp4" autoPlay loop muted playsInline />
-            <span className={styles.reelLabel}>TikTok</span>
-          </div>
+          {[1, 2, 3, 4, 5, 6].map((n) => (
+            <div className={styles.reelCard} key={n}>
+              <video className={styles.reelVideo} src={`/showcase/reel-${n}.mp4`} autoPlay loop muted playsInline />
+              <span className={styles.reelLabel}>{['Reels', 'Shorts', 'TikTok'][(n - 1) % 3]}</span>
+            </div>
+          ))}
         </div>
       </section>
 
