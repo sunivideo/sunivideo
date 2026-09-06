@@ -2,6 +2,37 @@
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 24px;
+  position: relative;
+  overflow-x: clip;
+}
+
+.glow1 {
+  position: absolute;
+  top: -120px;
+  right: -180px;
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(255,92,168,0.35), transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glow2 {
+  position: absolute;
+  top: 320px;
+  left: -220px;
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(232,255,107,0.22), transparent 70%);
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.nav, .hero, .section, .footer {
+  position: relative;
+  z-index: 1;
 }
 
 .nav {
@@ -14,6 +45,15 @@
 .logo {
   font-size: 22px;
   font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logoMark {
+  width: 22px;
+  height: 22px;
+  color: var(--lime);
 }
 
 .logo span { color: var(--lime); }
@@ -216,10 +256,62 @@
   padding: 4px;
 }
 
+.stepIcon {
+  width: 40px;
+  height: 40px;
+  color: var(--ink);
+  background: var(--lime);
+  border-radius: 12px;
+  padding: 9px;
+}
+
 .stepNum {
   font-family: 'Fredoka', sans-serif;
-  font-size: 34px;
-  color: var(--lime);
+  font-size: 15px;
+  color: var(--text-dim);
+  margin-top: 14px;
+}
+
+/* Showcase / gallery */
+.showcase {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 40px;
+}
+
+@media (max-width: 760px) {
+  .showcase { grid-template-columns: 1fr 1fr; }
+}
+
+.reelCard {
+  border-radius: 18px;
+  aspect-ratio: 9 / 15;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding: 14px;
+}
+
+.reelPlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  opacity: 0.9;
+}
+
+.reelLabel {
+  position: relative;
+  color: rgba(255,255,255,0.92);
+  font-size: 13px;
+  font-weight: 600;
+  background: rgba(0,0,0,0.25);
+  padding: 6px 10px;
+  border-radius: 999px;
 }
 
 .stepTitle {

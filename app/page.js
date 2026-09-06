@@ -35,9 +35,15 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <nav className={styles.nav}>
-        <div className={styles.logo}>suni<span>video</span></div>
+        <div className={styles.logo}>
+          <svg className={styles.logoMark} viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.8L21 11l-6.8 2.2L12 20l-2.2-6.8L3 11l6.8-2.2L12 2z"/></svg>
+          suni<span>video</span>
+        </div>
         <button className={styles.navCta}>Ücretsiz Dene</button>
       </nav>
+
+      <div className={styles.glow1} />
+      <div className={styles.glow2} />
 
       <section className={styles.hero}>
         <div>
@@ -105,19 +111,40 @@ export default function Home() {
         <h2 className={styles.sectionTitle}>Üç adımda videon hazır</h2>
         <div className={styles.steps}>
           <div className={styles.step}>
-            <div className={styles.stepNum}>1</div>
+            <svg className={styles.stepIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            <div className={styles.stepNum}>Adım 1</div>
             <div className={styles.stepTitle}>Metnini yaz</div>
             <div className={styles.stepText}>Karakterinin ne söyleyeceğini birkaç cümleyle anlat.</div>
           </div>
           <div className={styles.step}>
-            <div className={styles.stepNum}>2</div>
+            <svg className={styles.stepIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+            <div className={styles.stepNum}>Adım 2</div>
             <div className={styles.stepTitle}>Karakterini seç</div>
             <div className={styles.stepText}>Hazır karakterlerden birini seç ya da kendi görselini yükle.</div>
           </div>
           <div className={styles.step}>
-            <div className={styles.stepNum}>3</div>
+            <svg className={styles.stepIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 19h16"/></svg>
+            <div className={styles.stepNum}>Adım 3</div>
             <div className={styles.stepTitle}>İndir ve paylaş</div>
             <div className={styles.stepText}>Videon hazır olduğunda doğrudan telefonuna indir, dakikalar içinde paylaş.</div>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.section}>
+        <h2 className={styles.sectionTitle}>Sosyal medyada böyle görünür</h2>
+        <div className={styles.showcase}>
+          <div className={styles.reelCard} style={{ background: 'linear-gradient(160deg, #ff5ca8, #7b3fb8)' }}>
+            <svg className={styles.reelPlay} viewBox="0 0 24 24" fill="white"><circle cx="12" cy="12" r="11" opacity="0.25"/><path d="M10 8l6 4-6 4V8z"/></svg>
+            <span className={styles.reelLabel}>Reels</span>
+          </div>
+          <div className={styles.reelCard} style={{ background: 'linear-gradient(160deg, #e8ff6b, #2fa38a)' }}>
+            <svg className={styles.reelPlay} viewBox="0 0 24 24" fill="white"><circle cx="12" cy="12" r="11" opacity="0.25"/><path d="M10 8l6 4-6 4V8z"/></svg>
+            <span className={styles.reelLabel}>Shorts</span>
+          </div>
+          <div className={styles.reelCard} style={{ background: 'linear-gradient(160deg, #6ba8ff, #ff5ca8)' }}>
+            <svg className={styles.reelPlay} viewBox="0 0 24 24" fill="white"><circle cx="12" cy="12" r="11" opacity="0.25"/><path d="M10 8l6 4-6 4V8z"/></svg>
+            <span className={styles.reelLabel}>TikTok</span>
           </div>
         </div>
       </section>
