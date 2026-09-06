@@ -142,6 +142,45 @@
   margin-top: 12px;
 }
 
+.durationRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.durationChip {
+  background: var(--ink);
+  color: var(--text-dim);
+  border: 1px solid var(--surface-2);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+}
+
+.durationChip:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.durationChipActive {
+  background: var(--lime);
+  color: var(--ink);
+  border-color: var(--lime);
+  font-weight: 600;
+}
+
+.priceLine {
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--text-dim);
+}
+
+.priceLine strong {
+  color: var(--lime);
+}
+
 .videoWrap {
   margin-top: 16px;
 }

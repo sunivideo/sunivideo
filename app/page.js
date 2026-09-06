@@ -1,12 +1,16 @@
 'use client';
 import { useState } from 'react';
 import styles from './page.module.css';
+import { DURATION_OPTIONS } from './pricing';
 
 export default function Home() {
   const [script, setScript] = useState('');
+  const [duration, setDuration] = useState(5);
   const [loading, setLoading] = useState(false);
   const [videoUrl, setVideoUrl] = useState(null);
   const [error, setError] = useState(null);
+
+  const selected = DURATION_OPTIONS.find((d) => d.seconds === duration);
 
   async function handleGenerate() {
     setLoading(true);
@@ -16,7 +20,7 @@ export default function Home() {
       const res = await fetch('/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ script }),
+        body: JSON.stringify({ script, duration }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Bir hata oluştu');
@@ -62,12 +66,31 @@ export default function Home() {
             placeholder="Örn: Merhaba, ben konuşan kedi Pamuk!"
             rows={4}
           />
+
+          <div className={styles.durationRow}>
+            {DURATION_OPTIONS.map((opt) => (
+              <button
+                key={opt.seconds}
+                className={`${styles.durationChip} ${duration === opt.seconds ? styles.durationChipActive : ''}`}
+                onClick={() => opt.available && setDuration(opt.seconds)}
+                disabled={!opt.available}
+                title={opt.available ? '' : 'Yakında'}
+              >
+                {opt.seconds} sn
+              </button>
+            ))}
+          </div>
+
+          <div className={styles.priceLine}>
+            Bu video ~<strong>{selected.priceAzn} AZN</strong>'ye mal olacak
+          </div>
+
           <button
             className={styles.demoBtn}
             onClick={handleGenerate}
             disabled={loading || !script}
           >
-            {loading ? 'Üretiliyor... (1-2 dakika)' : 'Video Üret'}
+            {loading ? 'Üretiliyor... (1-2 dakika)' : `Video Üret (${selected.priceAzn} AZN)`}
           </button>
           {error && <p className={styles.errorText}>Hata: {error}</p>}
           {videoUrl && (
