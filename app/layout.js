@@ -1,6 +1,8 @@
+import './globals.css';
+
 export const metadata = {
-  title: 'sunivideo',
-  description: 'AI ile video üretim platformu',
+  title: 'sunivideo — Videon 60 saniyede hazır',
+  description: 'Tek bir cümle yaz, konuşan karakterinin videosunu saniyeler içinde üret.',
 };
 
 export default function RootLayout({ children }) {

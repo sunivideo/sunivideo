@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --ink: #14121f;
+  --surface: #1e1b2e;
+  --surface-2: #262239;
+  --lime: #e8ff6b;
+  --pink: #ff5ca8;
+  --text: #f5f3ff;
+  --text-dim: #b8b3cc;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--ink);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .display {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  line-height: 1.05;
+  margin: 0;
+}
+
+a { color: inherit; }
+
+button {
+  font-family: 'Fredoka', sans-serif;
+  cursor: pointer;
+  border: none;
+}
+
+button:focus-visible, textarea:focus-visible, input:focus-visible {
+  outline: 3px solid var(--pink);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
