@@ -134,38 +134,17 @@ export default function Home() {
       <section className={styles.section}>
         <h2 className={styles.sectionTitle}>Sosyal medyada böyle görünür</h2>
         <div className={styles.showcase}>
-          <div className={styles.reelCard} style={{ background: 'linear-gradient(160deg, #ff5ca8, #7b3fb8)' }}>
-            <svg className={styles.reelPlay} viewBox="0 0 24 24" fill="white"><circle cx="12" cy="12" r="11" opacity="0.25"/><path d="M10 8l6 4-6 4V8z"/></svg>
+          <div className={styles.reelCard}>
+            <video className={styles.reelVideo} src="/showcase/reel-1.mp4" autoPlay loop muted playsInline />
             <span className={styles.reelLabel}>Reels</span>
           </div>
-          <div className={styles.reelCard} style={{ background: 'linear-gradient(160deg, #e8ff6b, #2fa38a)' }}>
-            <svg className={styles.reelPlay} viewBox="0 0 24 24" fill="white"><circle cx="12" cy="12" r="11" opacity="0.25"/><path d="M10 8l6 4-6 4V8z"/></svg>
+          <div className={styles.reelCard}>
+            <video className={styles.reelVideo} src="/showcase/reel-2.mp4" autoPlay loop muted playsInline />
             <span className={styles.reelLabel}>Shorts</span>
           </div>
-          <div className={styles.reelCard} style={{ background: 'linear-gradient(160deg, #6ba8ff, #ff5ca8)' }}>
-            <svg className={styles.reelPlay} viewBox="0 0 24 24" fill="white"><circle cx="12" cy="12" r="11" opacity="0.25"/><path d="M10 8l6 4-6 4V8z"/></svg>
+          <div className={styles.reelCard}>
+            <video className={styles.reelVideo} src="/showcase/reel-3.mp4" autoPlay loop muted playsInline />
             <span className={styles.reelLabel}>TikTok</span>
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>Basit, şeffaf fiyatlandırma</h2>
-        <div className={styles.plans}>
-          <div className={styles.plan}>
-            <div className={styles.planName}>Başlangıç</div>
-            <div className={styles.planPrice}>10 AZN<span>/ay</span></div>
-            <div className={styles.planDesc}>10 video/ay. Denemeye başlamak için ideal.</div>
-          </div>
-          <div className={`${styles.plan} ${styles.planFeatured}`}>
-            <div className={styles.planName}>İçerik Üretici</div>
-            <div className={styles.planPrice}>29 AZN<span>/ay</span></div>
-            <div className={styles.planDesc}>40 video/ay. Düzenli paylaşım yapanlar için.</div>
-          </div>
-          <div className={styles.plan}>
-            <div className={styles.planName}>Stüdyo</div>
-            <div className={styles.planPrice}>79 AZN<span>/ay</span></div>
-            <div className={styles.planDesc}>150 video/ay + öncelikli üretim.</div>
           </div>
         </div>
       </section>
