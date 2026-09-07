@@ -18,8 +18,10 @@ export default function Home() {
 
   const [user, setUser] = useState(null);
   const [balance, setBalance] = useState(null);
+  const [displayName, setDisplayName] = useState(null);
   const [history, setHistory] = useState([]);
   const [showAuth, setShowAuth] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
 
   const selected = DURATION_OPTIONS.find((d) => d.seconds === duration);
 
@@ -40,8 +42,11 @@ export default function Home() {
 
   async function loadUser(u) {
     setUser(u);
-    const { data: profile } = await supabase.from('profiles').select('wallet_balance').eq('id', u.id).single();
-    if (profile) setBalance(profile.wallet_balance);
+    const { data: profile } = await supabase.from('profiles').select('wallet_balance, display_name').eq('id', u.id).single();
+    if (profile) {
+      setBalance(profile.wallet_balance);
+      setDisplayName(profile.display_name);
+    }
     const { data: videos } = await supabase
       .from('videos')
       .select('*')
@@ -153,8 +158,29 @@ export default function Home() {
           </div>
           {user ? (
             <div className={styles.accountBox}>
-              <span className={styles.balanceTag}>{balance ?? '...'} AZN</span>
-              <button className={styles.navCta} onClick={handleSignOut}>Çıxış</button>
+              <button className={styles.balanceTag} onClick={() => setShowProfile((s) => !s)}>
+                {displayName || user.email?.split('@')[0]} · {balance ?? '...'} AZN
+              </button>
+              {showProfile && (
+                <div className={styles.profilePanel}>
+                  <div className={styles.profileName}>{displayName || 'İstifadəçi'}</div>
+                  <div className={styles.profileEmail}>{user.email}</div>
+                  <div className={styles.profileBalance}>{balance ?? '...'} AZN</div>
+                  <div className={styles.profileHistoryTitle}>Videoların</div>
+                  {history.length === 0 ? (
+                    <div className={styles.profileEmpty}>Hələ heç bir video yaratmamısan.</div>
+                  ) : (
+                    <div className={styles.historyBox}>
+                      {history.map((v, i) => (
+                        <a key={i} href={v.video_url} target="_blank" rel="noreferrer" className={styles.historyItem}>
+                          {v.script?.slice(0, 40)}{v.script?.length > 40 ? '…' : ''} · {v.duration}s
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                  <button className={styles.navCta} onClick={handleSignOut}>Çıxış</button>
+                </div>
+              )}
             </div>
           ) : (
             <button className={styles.navCta} onClick={() => setShowAuth(true)}>Qeydiyyat / Giriş</button>
@@ -230,17 +256,6 @@ export default function Home() {
           {videoUrl && (
             <div className={styles.videoWrap}>
               <video src={videoUrl} controls />
-            </div>
-          )}
-
-          {user && history.length > 0 && (
-            <div className={styles.historyBox}>
-              <div className={styles.historyTitle}>Sənin videoların</div>
-              {history.map((v, i) => (
-                <a key={i} href={v.video_url} target="_blank" rel="noreferrer" className={styles.historyItem}>
-                  {v.script?.slice(0, 40)}{v.script?.length > 40 ? '…' : ''} · {v.duration}s
-                </a>
-              ))}
             </div>
           )}
         </div>

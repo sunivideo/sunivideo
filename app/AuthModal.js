@@ -5,6 +5,7 @@ import styles from './page.module.css';
 
 export default function AuthModal({ onClose, onSuccess }) {
   const [mode, setMode] = useState('signup'); // 'signup' | 'login'
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -18,7 +19,11 @@ export default function AuthModal({ onClose, onSuccess }) {
     setInfo(null);
     try {
       if (mode === 'signup') {
-        const { error } = await supabase.auth.signUp({ email, password });
+        const { error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: { data: { display_name: name } },
+        });
         if (error) throw error;
         setInfo('Qeydiyyat uğurlu oldu! E-poçtunu yoxla və linki təsdiqlə, sonra giriş et.');
       } else {
@@ -52,6 +57,16 @@ export default function AuthModal({ onClose, onSuccess }) {
           </button>
         </div>
         <form onSubmit={handleSubmit}>
+          {mode === 'signup' && (
+            <input
+              className={styles.modalInput}
+              type="text"
+              placeholder="Adın"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          )}
           <input
             className={styles.modalInput}
             type="email"

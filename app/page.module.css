@@ -108,9 +108,7 @@
 }
 
 .accountBox {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  position: relative;
 }
 
 .balanceTag {
@@ -121,6 +119,59 @@
   padding: 8px 14px;
   border-radius: 999px;
   font-size: 14px;
+}
+
+.profilePanel {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 280px;
+  background: var(--surface);
+  border: 1px solid var(--surface-2);
+  border-radius: 16px;
+  padding: 20px;
+  z-index: 40;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+}
+
+.profileName {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text);
+}
+
+.profileEmail {
+  color: var(--text-dim);
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.profileBalance {
+  margin-top: 12px;
+  color: var(--lime);
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.profileHistoryTitle {
+  margin-top: 18px;
+  font-size: 13px;
+  color: var(--text-dim);
+  border-top: 1px solid var(--surface-2);
+  padding-top: 14px;
+}
+
+.profileEmpty {
+  color: var(--text-dim);
+  font-size: 13px;
+  margin-top: 8px;
+  font-style: italic;
+}
+
+.profilePanel .navCta {
+  width: 100%;
+  margin-top: 16px;
+  text-align: center;
 }
 
 /* Auth modal */
