@@ -1,8 +1,10 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './page.module.css';
 import { DURATION_OPTIONS } from './pricing';
 import { LANGS, TRANSLATIONS } from './translations';
+import { supabase } from './lib/supabaseClient';
+import AuthModal from './AuthModal';
 
 export default function Home() {
   const [lang, setLang] = useState('az');
@@ -14,21 +16,67 @@ export default function Home() {
   const [videoUrl, setVideoUrl] = useState(null);
   const [error, setError] = useState(null);
 
+  const [user, setUser] = useState(null);
+  const [balance, setBalance] = useState(null);
+  const [history, setHistory] = useState([]);
+  const [showAuth, setShowAuth] = useState(false);
+
   const selected = DURATION_OPTIONS.find((d) => d.seconds === duration);
 
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      if (data.session) loadUser(data.session.user);
+    });
+    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session) loadUser(session.user);
+      else {
+        setUser(null);
+        setBalance(null);
+        setHistory([]);
+      }
+    });
+    return () => sub.subscription.unsubscribe();
+  }, []);
+
+  async function loadUser(u) {
+    setUser(u);
+    const { data: profile } = await supabase.from('profiles').select('wallet_balance').eq('id', u.id).single();
+    if (profile) setBalance(profile.wallet_balance);
+    const { data: videos } = await supabase
+      .from('videos')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(10);
+    setHistory(videos || []);
+  }
+
+  async function handleSignOut() {
+    await supabase.auth.signOut();
+  }
+
   async function handleGenerate() {
+    if (!user) {
+      setShowAuth(true);
+      return;
+    }
     setLoading(true);
     setError(null);
     setVideoUrl(null);
     try {
+      const { data: sessionData } = await supabase.auth.getSession();
       const res = await fetch('/api/generate', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${sessionData.session.access_token}`,
+        },
         body: JSON.stringify({ script, duration }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Error');
       setVideoUrl(data.videoUrl);
+      setBalance(data.newBalance);
+      setHistory((h) => [{ script, duration, price_azn: selected.priceAzn, video_url: data.videoUrl, created_at: new Date().toISOString() }, ...h]);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -103,8 +151,23 @@ export default function Home() {
               </button>
             ))}
           </div>
+          {user ? (
+            <div className={styles.accountBox}>
+              <span className={styles.balanceTag}>{balance ?? '...'} AZN</span>
+              <button className={styles.navCta} onClick={handleSignOut}>Çıxış</button>
+            </div>
+          ) : (
+            <button className={styles.navCta} onClick={() => setShowAuth(true)}>Qeydiyyat / Giriş</button>
+          )}
         </div>
       </nav>
+
+      {showAuth && (
+        <AuthModal
+          onClose={() => setShowAuth(false)}
+          onSuccess={() => setShowAuth(false)}
+        />
+      )}
 
       <div className={styles.glow1} />
       <div className={styles.glow2} />
@@ -167,6 +230,17 @@ export default function Home() {
           {videoUrl && (
             <div className={styles.videoWrap}>
               <video src={videoUrl} controls />
+            </div>
+          )}
+
+          {user && history.length > 0 && (
+            <div className={styles.historyBox}>
+              <div className={styles.historyTitle}>Sənin videoların</div>
+              {history.map((v, i) => (
+                <a key={i} href={v.video_url} target="_blank" rel="noreferrer" className={styles.historyItem}>
+                  {v.script?.slice(0, 40)}{v.script?.length > 40 ? '…' : ''} · {v.duration}s
+                </a>
+              ))}
             </div>
           )}
         </div>

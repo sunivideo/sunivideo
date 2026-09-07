@@ -107,6 +107,118 @@
   flex-shrink: 0;
 }
 
+.accountBox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.balanceTag {
+  background: var(--surface);
+  border: 1px solid var(--surface-2);
+  color: var(--lime);
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 14px;
+}
+
+/* Auth modal */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: 20px;
+}
+
+.modalCard {
+  background: var(--surface);
+  border: 1px solid var(--surface-2);
+  border-radius: 20px;
+  padding: 28px;
+  width: 100%;
+  max-width: 380px;
+  position: relative;
+}
+
+.modalClose {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  color: var(--text-dim);
+  font-size: 16px;
+}
+
+.modalTabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.modalTab {
+  flex: 1;
+  background: var(--ink);
+  color: var(--text-dim);
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.modalTabActive {
+  background: var(--lime);
+  color: var(--ink);
+}
+
+.modalInput {
+  width: 100%;
+  background: var(--ink);
+  border: 1px solid var(--surface-2);
+  color: var(--text);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  font-family: inherit;
+}
+
+.infoText {
+  color: var(--lime);
+  font-size: 13.5px;
+  margin: 4px 0 10px;
+}
+
+/* Video history */
+.historyBox {
+  margin-top: 20px;
+  border-top: 1px solid var(--surface-2);
+  padding-top: 16px;
+}
+
+.historyTitle {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.historyItem {
+  display: block;
+  color: var(--text);
+  font-size: 13.5px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--surface-2);
+  text-decoration: none;
+}
+
+.historyItem:hover {
+  color: var(--lime);
+}
+
 .langBtnActive {
   background: var(--lime);
   color: var(--ink);
