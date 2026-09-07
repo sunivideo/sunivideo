@@ -120,7 +120,6 @@ export default function Home() {
             <button className={styles.primaryBtn} onClick={scrollToDemo}>
               {t.heroBtn}
             </button>
-            <span className={styles.ghostNote}>{t.ghostNote}</span>
           </div>
           <div className={styles.socialRow}>
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.5V8.5L15.8 12l-6.2 3.5z"/></svg>
