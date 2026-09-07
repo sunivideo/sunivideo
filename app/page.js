@@ -103,7 +103,6 @@ export default function Home() {
               </button>
             ))}
           </div>
-          <button className={styles.navCta}>{t.navCta}</button>
         </div>
       </nav>
 
