@@ -2,9 +2,11 @@
 import { useState } from 'react';
 import { supabase } from './lib/supabaseClient';
 import styles from './page.module.css';
+import { TRANSLATIONS } from './translations';
 
-export default function AuthModal({ onClose, onSuccess }) {
-  const [mode, setMode] = useState('signup'); // 'signup' | 'login'
+export default function AuthModal({ lang, onClose, onSuccess }) {
+  const t = TRANSLATIONS[lang];
+  const [mode, setMode] = useState('signup');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -25,7 +27,7 @@ export default function AuthModal({ onClose, onSuccess }) {
           options: { data: { display_name: name } },
         });
         if (error) throw error;
-        setInfo('Qeydiyyat uğurlu oldu! E-poçtunu yoxla və linki təsdiqlə, sonra giriş et.');
+        setInfo(t.signupSuccess);
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
@@ -47,13 +49,13 @@ export default function AuthModal({ onClose, onSuccess }) {
             className={`${styles.modalTab} ${mode === 'signup' ? styles.modalTabActive : ''}`}
             onClick={() => setMode('signup')}
           >
-            Qeydiyyat
+            {t.signupTab}
           </button>
           <button
             className={`${styles.modalTab} ${mode === 'login' ? styles.modalTabActive : ''}`}
             onClick={() => setMode('login')}
           >
-            Giriş
+            {t.loginTab}
           </button>
         </div>
         <form onSubmit={handleSubmit}>
@@ -61,7 +63,7 @@ export default function AuthModal({ onClose, onSuccess }) {
             <input
               className={styles.modalInput}
               type="text"
-              placeholder="Adın"
+              placeholder={t.namePlaceholder}
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
@@ -70,7 +72,7 @@ export default function AuthModal({ onClose, onSuccess }) {
           <input
             className={styles.modalInput}
             type="email"
-            placeholder="E-poçt"
+            placeholder={t.emailPlaceholder}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -78,7 +80,7 @@ export default function AuthModal({ onClose, onSuccess }) {
           <input
             className={styles.modalInput}
             type="password"
-            placeholder="Şifrə (ən az 6 simvol)"
+            placeholder={t.passwordPlaceholder}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             minLength={6}
@@ -87,7 +89,7 @@ export default function AuthModal({ onClose, onSuccess }) {
           {error && <p className={styles.errorText}>{error}</p>}
           {info && <p className={styles.infoText}>{info}</p>}
           <button className={styles.demoBtn} type="submit" disabled={loading}>
-            {loading ? '...' : mode === 'signup' ? 'Qeydiyyatdan keç' : 'Giriş et'}
+            {loading ? '...' : mode === 'signup' ? t.signupBtn : t.loginBtn}
           </button>
         </form>
       </div>

@@ -164,13 +164,14 @@ export default function Home() {
               </button>
             </div>
           ) : (
-            <button className={styles.navCta} onClick={() => setShowAuth(true)}>Qeydiyyat / Giriş</button>
+            <button className={styles.navCta} onClick={() => setShowAuth(true)}>{t.authCta}</button>
           )}
         </div>
       </nav>
 
       {showProfile && (
         <ProfileModal
+          lang={lang}
           user={user}
           balance={balance}
           displayName={displayName}
@@ -185,6 +186,7 @@ export default function Home() {
 
       {showAuth && (
         <AuthModal
+          lang={lang}
           onClose={() => setShowAuth(false)}
           onSuccess={() => setShowAuth(false)}
         />
