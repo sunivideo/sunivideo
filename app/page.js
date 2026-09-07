@@ -5,6 +5,7 @@ import { DURATION_OPTIONS } from './pricing';
 import { LANGS, TRANSLATIONS } from './translations';
 import { supabase } from './lib/supabaseClient';
 import AuthModal from './AuthModal';
+import ProfileModal from './ProfileModal';
 
 export default function Home() {
   const [lang, setLang] = useState('az');
@@ -158,35 +159,29 @@ export default function Home() {
           </div>
           {user ? (
             <div className={styles.accountBox}>
-              <button className={styles.balanceTag} onClick={() => setShowProfile((s) => !s)}>
+              <button className={styles.balanceTag} onClick={() => setShowProfile(true)}>
                 {displayName || user.email?.split('@')[0]} · {balance ?? '...'} AZN
               </button>
-              {showProfile && (
-                <div className={styles.profilePanel}>
-                  <div className={styles.profileName}>{displayName || 'İstifadəçi'}</div>
-                  <div className={styles.profileEmail}>{user.email}</div>
-                  <div className={styles.profileBalance}>{balance ?? '...'} AZN</div>
-                  <div className={styles.profileHistoryTitle}>Videoların</div>
-                  {history.length === 0 ? (
-                    <div className={styles.profileEmpty}>Hələ heç bir video yaratmamısan.</div>
-                  ) : (
-                    <div className={styles.historyBox}>
-                      {history.map((v, i) => (
-                        <a key={i} href={v.video_url} target="_blank" rel="noreferrer" className={styles.historyItem}>
-                          {v.script?.slice(0, 40)}{v.script?.length > 40 ? '…' : ''} · {v.duration}s
-                        </a>
-                      ))}
-                    </div>
-                  )}
-                  <button className={styles.navCta} onClick={handleSignOut}>Çıxış</button>
-                </div>
-              )}
             </div>
           ) : (
             <button className={styles.navCta} onClick={() => setShowAuth(true)}>Qeydiyyat / Giriş</button>
           )}
         </div>
       </nav>
+
+      {showProfile && (
+        <ProfileModal
+          user={user}
+          balance={balance}
+          displayName={displayName}
+          history={history}
+          onClose={() => setShowProfile(false)}
+          onSignOut={() => {
+            handleSignOut();
+            setShowProfile(false);
+          }}
+        />
+      )}
 
       {showAuth && (
         <AuthModal
